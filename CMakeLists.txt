@@ -19,14 +19,27 @@ set(CYGLIDAR_ROS_PATH "./D1_ROS2/")
 FILE(GLOB CYGLIDAR_ROS_SRC
     "${CYGLIDAR_ROS_PATH}/src/*.cpp"
 )
-
+include_directories(/opt/ros/humble/include)
 find_package(ament_cmake REQUIRED)
 find_package(std_msgs REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(sensor_msgs REQUIRED)
+find_package(message_filters REQUIRED)
+find_package(pcl_msgs REQUIRED)
 find_package(pcl_conversions REQUIRED)
 find_package(Boost REQUIRED COMPONENTS system)
 find_package(PCL REQUIRED QUIET COMPONENTS core features filters io segmentation surface)
+
+
+include_directories(
+  include
+  ${message_filters_INCLUDE_DIRS}
+)
+
+include_directories(
+  include
+  ${pcl_msgs_INCLUDE_DIRS}
+)
 
 include_directories(${CYGLIDAR_SDK_PATH}/include ${CYGLIDAR_ROS_PATH}/include)
 
